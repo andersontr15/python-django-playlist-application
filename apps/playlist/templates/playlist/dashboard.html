@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<a href="/logout">Logout</a>
+<hr>
+	<h3>Hello, {{user.first_name}} {{user.last_name}} </h3>
+	<hr>
+	<h5>All The Songs in Our Hub</h5>
+	<table class="table class table-bordered table-striped table-hovered table-hover">
+		<thead>
+			<tr>
+				<th>Artist</th>
+				<th>Title</th>
+				<th>Number of times song has been added</th>
+				<th>Add to playlist</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for song in songs %}
+			<tr>
+				<td>{{song.artist}}</td>
+				<td><a href="/song/{{song.id}}">{{song.title}}</a></td>
+				<td>{{song.counter}}</td>
+				<td><a href="/song/{{song.id}}/add_playlist">Add</a></td>
+			</tr>
+		{%endfor%}
+		</tbody>
+	</table>
+
+	<hr>
+	<h5>Add A Song</h5>
+	<form action="/add_song" method="post">
+		{%csrf_token%}
+		Artist:<input type="text" name="artist" required>
+		Title:<input type="text" name="title" required>
+		<input type="submit" value="Add Song">
+	</form>
+</body>
+</div>
+</html>

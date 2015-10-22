@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<a href="/logout">Logout</a>
+<span>|</span>
+<a href="/dashboard">Dashboard</a>
+<hr>
+<h5>{{user.first_name}} {{user.last_name}}'s PlayList</h5>
+<table class="table class table-bordered table-striped table-hovered">
+	<thead>
+		<tr>
+			<th>Artist</th>
+			<th>Title</th>
+			<th>Times Added</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for song in songs %}
+		<tr>
+			<td>{{song.song.artist}}</td>
+			<td>{{song.song.title}}</td>
+			<td>{{song.counter}}</td>
+		</tr>
+	{%endfor%}
+	</tbody>
+</table>
+</div>
+</body>
+</html>
