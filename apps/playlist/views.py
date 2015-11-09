@@ -77,8 +77,8 @@ def add_song(request):
 def user(request, user_id):
 	print "in user"
 	user = User.objects.get(id=user_id)
-	song = Song.objects.all()
-	songs = Playlist.objects.all().filter(user=user).filter(song=song).order_by('counter')
+	song = Song.objects.all().distinct('counter')
+	songs = Playlist.objects.all().filter(user=user).filter(song=song).distinct('song')
 	context = {
 	'user': user,
 	'songs': songs,
@@ -87,8 +87,9 @@ def user(request, user_id):
 
 def song(request, song_id):
 	print "Viewing song"
+	user = request.session['user_id']
 	song = Song.objects.get(id=song_id)
-	playlists = Playlist.objects.all().filter(song=song).exclude(user=request.session['user_id'])
+	playlists = Playlist.objects.all().filter(song=song).exclude(user=request.session['user_id']).distinct('user')
 	context = {
 	'playlists': playlists,
 	'song': song,
